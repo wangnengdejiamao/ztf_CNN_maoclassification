@@ -1,0 +1,38 @@
+MIT License
+
+Copyright (c) 2023-2024 [Your Name]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+Data Acknowledgment:
+
+This software uses data from the Zwicky Transient Facility (ZTF). ZTF is
+supported by the National Science Foundation under Grant No. AST-1440341 and
+a collaboration including Caltech, IPAC, the Weizmann Institute for Science,
+the Oskar Klein Center at Stockholm University, the University of Maryland,
+the University of Washington, Deutsches Elektronen-Synchrotron and Humboldt
+University, Los Alamos National Laboratories, the TANGO Consortium of Taiwan,
+the University of Wisconsin at Milwaukee, and Lawrence Berkeley National
+Laboratories. Operations are conducted by COO, IPAC, and UW.
+
+Data access is provided through the NASA/IPAC Infrared Science Archive, which
+is operated by the Jet Propulsion Laboratory, California Institute of Technology,
+under contract with the National Aeronautics and Space Administration.
