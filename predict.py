@@ -48,7 +48,7 @@ def load_model(model_path, device):
     Returns:
         Loaded PyTorch model in evaluation mode
     """
-    model = torch.load(model_path, map_location=device)
+    model = torch.load(model_path, map_location=device, weights_only=False)
     model.to(device)
     model.eval()
     return model
