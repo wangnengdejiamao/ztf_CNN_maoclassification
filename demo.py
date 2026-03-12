@@ -28,7 +28,7 @@ import torch
 import torchvision.transforms as transforms
 import astropy.coordinates as coord
 from astropy import units as u
-import requests
+import wget
 
 # Suppress warnings
 warnings.filterwarnings('ignore')
@@ -235,24 +235,28 @@ def download_light_curve(ra, dec, radius=0.00083, output_dir='demo_output', use_
         return create_mock_light_curve(ra, dec, output_dir)
     
     # Construct API URL
-    api_url = f"{IRSA_API_URL}?POS=CIRCLE+{ra}+{dec}+{radius}&COLLECTION=zfille&FORMAT=csv"
+    api_url = f"{IRSA_API_URL}?POS=CIRCLE+{ra}+{dec}+{radius}&FORMAT=csv"
     
     print(f"\n[1/4] Downloading ZTF light curve data...")
     print(f"  Coordinates: RA={ra}, DEC={dec}")
     print(f"  Search radius: {radius} deg ({radius*3600:.1f} arcsec)")
     
     try:
-        response = requests.get(api_url, timeout=30)
-        if response.status_code == 200 and len(response.content) > 100:
-            # Check if we got actual data (not empty or error message)
-            content = response.content.decode('utf-8')
-            if 'mjd' in content.lower() or 'mag' in content.lower():
-                with open(output_file, 'wb') as f:
-                    f.write(response.content)
+        wget.download(api_url, out=output_file)
+        
+        # Check if file was created and has content
+        if os.path.exists(output_file) and os.path.getsize(output_file) > 100:
+            # Check if it's valid CSV with expected columns
+            with open(output_file, 'r') as f:
+                content = f.read()
+            if 'mjd' in content.lower() or 'mag' in content.lower() or 'ra' in content.lower():
                 print(f"\n  ✓ Downloaded to: {output_file}")
                 return output_file
         
-        # If download failed or returned empty data, use mock
+        # If file is empty or invalid, remove it and use mock
+        if os.path.exists(output_file):
+            os.remove(output_file)
+        
         print(f"\n  ⚠ No ZTF data available for this coordinate")
         print(f"  Switching to mock data mode for demonstration...")
         return create_mock_light_curve(ra, dec, output_dir, eb_type='EW')
@@ -260,7 +264,7 @@ def download_light_curve(ra, dec, radius=0.00083, output_dir='demo_output', use_
     except Exception as e:
         print(f"\n  ⚠ Download failed: {e}")
         print(f"  Using mock data for demonstration...")
-        return create_mock_light_curve(ra, dec, output_dir)
+        return create_mock_light_curve(ra, dec, output_dir, eb_type='EW')
 
 
 def process_light_curve(csv_file, output_dir='demo_output'):
