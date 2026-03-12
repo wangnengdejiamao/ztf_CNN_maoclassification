@@ -3,6 +3,9 @@
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-1.10+-ee4c2c.svg)](https://pytorch.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![CI](https://github.com/wangnengdejiamao/ztf_CNN_maoclassification/actions/workflows/ci.yml/badge.svg)](https://github.com/wangnengdejiamao/ztf_CNN_maoclassification/actions)
+
+> 🔬 **Deep learning-based classification of eclipsing binary stars from ZTF time-series photometric data**
 
 This repository contains the implementation of a convolutional neural network (CNN) based classification system for identifying eclipsing binary stars from the Zwicky Transient Facility (ZTF) time-series photometric data. The project addresses the challenge of mining rare astronomical objects from large-scale sky survey datasets.
 
