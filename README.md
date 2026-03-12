@@ -138,6 +138,81 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
+## Quick Start Tutorial
+
+### Demo: Classify a Single Source
+
+This tutorial demonstrates the complete workflow using a specific sky coordinate (**RA=58.470417, DEC=43.256989**).
+
+#### Step 1: Run the Demo Script
+
+```bash
+# Run with default demo coordinates
+python demo.py
+
+# Or specify custom coordinates
+python demo.py --ra 58.470417 --dec 43.256989 --model mobilenetv2.pt
+```
+
+#### Step 2: Demo Output
+
+The demo will:
+1. **Download** ZTF light curve data from IRSA for the specified coordinates
+2. **Process** the light curve (phase folding, normalization)
+3. **Generate** a 224×224 grayscale image for CNN input
+4. **Classify** using the trained model
+5. **Display** results with confidence scores
+
+#### Step 3: Example Output
+
+```
+============================================================
+PREDICTION RESULTS
+============================================================
+Coordinates: RA=58.470417, DEC=43.256989
+
+Class Probabilities:
+  EA (Algol-type)     :  15.23%
+  EW (W UMa-type)     :  78.45%  >>> PREDICTION <<<
+  Non-EB              :   6.32%
+
+============================================================
+FINAL PREDICTION: EW (W UMa-type)
+============================================================
+Description: Contact or near-contact binary with continuous variation
+============================================================
+```
+
+#### Demo Files
+
+| File | Description |
+|------|-------------|
+| `demo.py` | Complete demo script with all functionality |
+| `demo_output/` | Output directory containing results |
+| `*_lightcurve.png` | Light curve visualization |
+| `*_cnn_input.png` | CNN input image (224×224) |
+| `prediction_result.png` | Classification results with confidence bars |
+
+#### Demo Options
+
+```bash
+python demo.py --help
+
+# Custom coordinates
+python demo.py --ra 123.456 --dec 67.890
+
+# Use GhostNet model
+python demo.py --model ghostnet.pt
+
+# Larger search radius (5 arcsec)
+python demo.py --radius 0.0014
+
+# Custom output directory
+python demo.py --output ./my_results
+```
+
+---
+
 ## Usage
 
 ### 1. Data Acquisition
