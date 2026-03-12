@@ -109,6 +109,11 @@ Examples:
         action='store_true',
         help='Skip generating visualization plots'
     )
+    parser.add_argument(
+        '--use-mock',
+        action='store_true',
+        help='Force use of mock data instead of downloading from IRSA'
+    )
     return parser.parse_args()
 
 
@@ -234,8 +239,8 @@ def download_light_curve(ra, dec, radius=0.00083, output_dir='demo_output', use_
         print(f"  (Simulating EW-type eclipsing binary for demonstration)")
         return create_mock_light_curve(ra, dec, output_dir)
     
-    # Construct API URL
-    api_url = f"{IRSA_API_URL}?POS=CIRCLE+{ra}+{dec}+{radius}&FORMAT=csv"
+    # Construct API URL (matching original data_download.py format)
+    api_url = f"{IRSA_API_URL}?POS=CIRCLE+{ra}+{dec}+{radius}&COLLECTION=&FORMAT=csv"
     
     print(f"\n[1/4] Downloading ZTF light curve data...")
     print(f"  Coordinates: RA={ra}, DEC={dec}")
@@ -631,7 +636,7 @@ def main():
     print(f"Device: {device}")
     
     # Step 1: Download light curve data (or use mock data)
-    csv_file = download_light_curve(args.ra, args.dec, args.radius, args.output, use_mock=False)
+    csv_file = download_light_curve(args.ra, args.dec, args.radius, args.output, use_mock=args.use_mock)
     if not csv_file:
         print("\n✗ Demo failed: Could not obtain light curve data")
         return 1
